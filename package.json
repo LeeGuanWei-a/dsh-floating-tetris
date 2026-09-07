@@ -1,0 +1,58 @@
+{
+  "name": "dsh-floating-tetris",
+  "version": "0.1.0",
+  "description": "Draggable frosted-glass Tetris overlay for the DeepSeek Harness Web GUI — host-resident client plugin with light/dark themes, top-10 local leaderboard, keyboard + on-screen controls. · DeepSeek Harness Web 端悬浮毛玻璃俄罗斯方块：深浅色主题、最近 10 局排行榜、键盘/屏幕双操控。宿主常驻 Client 插件，安装一次即可使用。",
+  "type": "module",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "client",
+    "ui",
+    "tetris",
+    "game"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeGuanWei-a/dsh-floating-tetris.git"
+  },
+  "homepage": "https://github.com/LeeGuanWei-a/dsh-floating-tetris#readme",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-lib.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "react": "^18.2.0"
+  }
+}

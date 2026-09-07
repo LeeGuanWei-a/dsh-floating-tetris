@@ -1,7 +1,6 @@
-# dependencies & build output
+# dependencies
 node_modules/
-host-plugin/lib/
-host-plugin/*.tgz
+*.tgz
 *.tsbuildinfo
 
 # OS
