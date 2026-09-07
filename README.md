@@ -1,5 +1,7 @@
 # 🕹️ dsh-floating-tetris — DeepSeek Harness 悬浮俄罗斯方块（宿主常驻插件）
 
+![screenshot](pic.png)
+
 在 **DeepSeek Harness Web GUI** 上运行的毛玻璃风格、可拖动的悬浮俄罗斯方块。作为**宿主常驻 Client 插件**分发：部署方安装一次后，Web 会话始终可用，**无需每会话 `cordis_define` / `cordis_run`**。
 
 功能：
