@@ -39,8 +39,23 @@ npm pack               # 打 tarball，发布或直接安装
 
 ## 装配（部署维护者）
 
-1. 让包可被目标部署解析：把发布产物安装进该部署的插件解析路径
-   （`node_modules/@your-scope/dsh-client-ui-floating-tetris/...`）。
+1. 让包可被目标部署解析：把发布产物安装进该部署的插件解析路径。
+
+   官方命令是 `dsh plugin --profile <name>`（把后续参数转发给该 profile 里的
+   **pnpm**，用法见 `dsh --help`）。先 `npm pack` 得到 tarball，再安装：
+
+   ```sh
+   # 已发布到 registry（把 <scope> 换成你的 scope）：
+   dsh plugin --profile web add @your-scope/dsh-client-ui-floating-tetris
+
+   # 或本地 tarball：
+   cd host-plugin && npm pack
+   dsh plugin --profile web add ./dsh-client-ui-floating-tetris-0.1.0.tgz
+   ```
+
+   等价于在 profile 目录执行 `pnpm add <包>`。回滚时用
+   `dsh plugin --profile web remove @your-scope/dsh-client-ui-floating-tetris`。
+
 2. 在宿主组合中、Web 应用加载的那一层（与 `@deepseek-ai/dsh-client-ui-*`
    相同的行集，即部署自己的 patch）新增一行：
 

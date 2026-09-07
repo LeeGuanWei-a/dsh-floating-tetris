@@ -44,7 +44,16 @@ dsh-floating-tetris/
 常驻形态 = **部署配置**。完整步骤见 `host-plugin/README.md`，概要：
 
 1. `cd host-plugin && npm install && npm run bundle` —— 产出 `lib/index.js` + `lib/client.js`（浏览器半区需宿主同款打包链产出 `window.__ModuleLoader__.load` 形态）；
-2. 把打包产物按包名装进目标部署的插件解析路径；
+2. 发布或打包 npm 包（`npm pack`），然后在**目标部署**上安装到 profile：
+
+   ```sh
+   # 在目标部署上，把包安装进指定 profile（命令转发给 pnpm，用法见 dsh --help）
+   dsh plugin --profile web add @your-scope/dsh-client-ui-floating-tetris
+
+   # 若用本地 tarball（先用 npm pack 生成 .tgz）：
+   dsh plugin --profile web add ./dsh-client-ui-floating-tetris-0.1.0.tgz
+   ```
+
 3. 在宿主组合（Web 应用加载的那层）加一行：
 
 ```yaml
@@ -53,6 +62,8 @@ dsh-floating-tetris/
 ```
 
 4. 重启 Web，验证 `shell.overlay` 出现 `tetris-window`、`sidebar.footer.action` 出现 `tetris-launch`。
+
+> 提示：`dsh plugin --profile <name>` 会把后续参数转发给 profile 目录里的 **pnpm**（`add` / `remove` / `ls` 等）。先 `dsh --help` 核对本机命令格式，再执行安装。
 
 普通使用者无需任何操作——悬浮窗随 Web 启动即可用。
 
