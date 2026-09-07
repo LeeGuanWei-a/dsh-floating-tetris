@@ -1,0 +1,13 @@
+# dependencies & build output
+node_modules/
+host-plugin/lib/
+host-plugin/*.tgz
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editors
+.idea/
+.vscode/
