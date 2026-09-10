@@ -16,7 +16,7 @@
 |---|---|
 | `@deepseek-ai/dsh`（Harness CLI / Web GUI） | **`0.1.2-rc.1`**（开发与实测版本） |
 | Web GUI 地址 | `http://127.0.0.1:3080` |
-| 宿主接口依赖 | `shell.overlay`、`sidebar.footer.action`、`timer`（`inject: ['timer']`） |
+| 宿主接口依赖 | `shell.overlay`、`conversation.session.header.utilities`、`timer`（`inject: ['timer']`） |
 | 插件形态 | **Host-resident Client Plugin**（node 半区空 apply + 浏览器半区 `./client`） |
 
 > ⚠️ `dsh.client` 元数据 + `window.__ModuleLoader__.load` 浏览器产物 + 宿主组合行扫描机制**绑定本版本 harness**。新版本装配前请核对三个插槽名、`timer` 契约与 `dsh-client-modules` 的 roster 扫描约定。
@@ -79,11 +79,13 @@ npm run build   # 重新生成 lib/，记得一并提交
 | `空格` | ⤓ | 硬降（+2/格） |
 | `P` | Ⅱ | 暂停 / 继续 |
 
-窗口标题栏：`▁`/`✕` 收起为标题条（自动暂停）、`🏆` 排行榜、`☀️/🌙` 深浅色；标题条上 `✕` 才是彻底隐藏（从侧栏或凭窗口状态恢复）。
+窗口标题栏：`▁`/`✕` 收起为标题条（自动暂停）、`🏆` 排行榜、`☀️/🌙` 深浅色；标题条上 `✕` 才是彻底隐藏（从会话头部 🎮 或凭窗口状态恢复）。
 
 键盘在悬浮窗打开期间**全局生效**，输入框 / 文本框打字不受干扰。
 
-> 注：`sidebar.footer.action` 入口可能与宿主自带的 `cordis-panel` 同行而显得拥挤；主恢复路径依赖窗口自带收起/还原（收起后仍保留可见标题条）。
+> **入口位置**：🎮 入口挂在**会话头部右侧工具区**（`conversation.session.header.utilities`，与"打开 App / 导出"等图标同排）——那是一排紧凑图标，不会像侧栏底部那条横向按钮行一样与其它插件挤在一起。该插槽是 session 级，入口在**打开会话后**可见；窗口默认打开、收起后仍保留可见标题条，所以不看入口也能还原。
+>
+> 若想完全不占宿主界面（不要 🎮 入口，仅靠窗口自身收起/还原），删掉 `src/client.js` 里 `conversation.session.header.utilities` 那段注册，重新 `npm run build` 即可。
 
 ## 🏆 排行榜规则
 
